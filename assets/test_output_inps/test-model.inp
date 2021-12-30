@@ -11,6 +11,13 @@ $ ---------------------------------------------------------
 
 
 $ ---------------------------------------------------------
+$              Global Parameters
+$ ---------------------------------------------------------
+
+
+
+
+$ ---------------------------------------------------------
 $              Title, Run Periods, Design Days, Holidays
 $ ---------------------------------------------------------
 
@@ -20,6 +27,19 @@ $ ---------------------------------------------------------
 TITLE
     LINE-1           = *ModelName*
     ..
+
+"Entire Year" = RUN-PERIOD-PD
+   BEGIN-MONTH     = 1
+   BEGIN-DAY      = 1
+   BEGIN-YEAR     = 2021
+   END-MONTH      = 12
+   END-DAY        = 31
+   END-YEAR       = 2021
+   ..
+
+"Standard US Holidays" = HOLIDAYS
+   LIBRARY-ENTRY "US"
+   ..
 
 $ ---------------------------------------------------------
 $              Compliance Data
@@ -66,25 +86,30 @@ $ ---------------------------------------------------------
 
 
 
-"8 n. Nrmlwght Cncrt Flr" = MATERIAL
+"8 n. Cncrt Blck Bsmnt Wll" = MATERIAL
    TYPE            = PROPERTIES
    THICKNESS       = 0.667
-   CONDUCTIVITY    = 0.732
-   DENSITY         = 144.962
-   SPECIFIC-HEAT   = 0.357
+   CONDUCTIVITY    = 0.42
+   DENSITY         = 114.996
+   SPECIFIC-HEAT   = 0.392
    ..
 
-"Typical Insulation-R7" = MATERIAL
-   TYPE           = RESISTANCE
-   RESISTANCE     = 7.0
+"Typical Insulation-R24" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 24.0
    ..
 
-"Metal Roof Surface" = MATERIAL
+"Typical Insulation-R31" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 31.0
+   ..
+
+"5/8 in. Gypsum Board" = MATERIAL
    TYPE            = PROPERTIES
-   THICKNESS       = 0.003
-   CONDUCTIVITY    = 14.344
-   DENSITY         = 488.452
-   SPECIFIC-HEAT   = 0.215
+   THICKNESS       = 0.052
+   CONDUCTIVITY    = 0.051
+   DENSITY         = 49.944
+   SPECIFIC-HEAT   = 0.468
    ..
 
 "Roof Membrane" = MATERIAL
@@ -95,14 +120,12 @@ $ ---------------------------------------------------------
    SPECIFIC-HEAT   = 0.627
    ..
 
-"Typical Insulation-R31" = MATERIAL
-   TYPE           = RESISTANCE
-   RESISTANCE     = 31.0
-   ..
-
-"Typical Insulation-R17" = MATERIAL
-   TYPE           = RESISTANCE
-   RESISTANCE     = 17.0
+"Metal Roof Surface" = MATERIAL
+   TYPE            = PROPERTIES
+   THICKNESS       = 0.003
+   CONDUCTIVITY    = 14.344
+   DENSITY         = 488.452
+   SPECIFIC-HEAT   = 0.215
    ..
 
 "F08 Metal surface" = MATERIAL
@@ -114,18 +137,36 @@ $ ---------------------------------------------------------
    ..
 
 "Typical Insulation-R3" = MATERIAL
-   TYPE           = RESISTANCE
-   RESISTANCE     = 3.0
-   ..
-
-"Typical Insulation-R24" = MATERIAL
-   TYPE           = RESISTANCE
-   RESISTANCE     = 24.0
+   TYPE            = RESISTANCE
+   RESISTANCE      = 3.0
    ..
 
 "Typical Insulation-R4" = MATERIAL
-   TYPE           = RESISTANCE
-   RESISTANCE     = 4.0
+   TYPE            = RESISTANCE
+   RESISTANCE      = 4.0
+   ..
+
+"8 n. Nrmlwght Cncrt Flr" = MATERIAL
+   TYPE            = PROPERTIES
+   THICKNESS       = 0.667
+   CONDUCTIVITY    = 0.732
+   DENSITY         = 144.962
+   SPECIFIC-HEAT   = 0.357
+   ..
+
+"Typical Insulation-R7" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 7.0
+   ..
+
+"Typical Insulation-R17" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 17.0
+   ..
+
+"Typical Carpet Pad" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 1.229
    ..
 
 "25mm Stucco" = MATERIAL
@@ -135,62 +176,8 @@ $ ---------------------------------------------------------
    DENSITY         = 115.87
    SPECIFIC-HEAT   = 0.361
    ..
-
-"8 n. Cncrt Blck Bsmnt Wll" = MATERIAL
-   TYPE            = PROPERTIES
-   THICKNESS       = 0.667
-   CONDUCTIVITY    = 0.42
-   DENSITY         = 114.996
-   SPECIFIC-HEAT   = 0.392
-   ..
-
-"Typical Carpet Pad" = MATERIAL
-   TYPE           = RESISTANCE
-   RESISTANCE     = 1.229
-   ..
-
-"5/8 in. Gypsum Board" = MATERIAL
-   TYPE            = PROPERTIES
-   THICKNESS       = 0.052
-   CONDUCTIVITY    = 0.051
-   DENSITY         = 49.944
-   SPECIFIC-HEAT   = 0.468
-   ..
-"Typical IEAD Roof-R32_l" = LAYERS
-   MATERIAL                 = (
-      "Roof Membrane",
-      "Typical Insulation-R31",
-      "Metal Roof Surface"
-   )
-   ..
-
-"Typical IEAD Roof-R32_c" = CONSTRUCTION
-   TYPE                 = LAYERS
-   ABSORPTANCE          = 0.7
-   ROUGHNESS            = 1
-   LAYERS               = "Typical IEAD Roof-R32_l"
-   ..
-
-"TpclInsltdStlFrmdExtrrWllR19_l" = LAYERS
-   MATERIAL                 = (
-      "25mm Stucco",
-      "5/8 in. Gypsum Board",
-      "Typical Insulation-R17",
-      "5/8 in. Gypsum Board"
-   )
-   ..
-
-"TpclInsltdStlFrmdExtrrWllR19_c" = CONSTRUCTION
-   TYPE                 = LAYERS
-   ABSORPTANCE          = 0.7
-   ROUGHNESS            = 5
-   LAYERS               = "TpclInsltdStlFrmdExtrrWllR19_l"
-   ..
-
-
-
 "Tpcl Insltd Mtl DrR3_l" = LAYERS
-   MATERIAL                 = (
+   MATERIAL             = (
       "F08 Metal surface",
       "Typical Insulation-R3"
    )
@@ -204,7 +191,7 @@ $ ---------------------------------------------------------
    ..
 
 "TpclInsltdStlFrmdExtrrFlrR27_l" = LAYERS
-   MATERIAL                 = (
+   MATERIAL             = (
       "25mm Stucco",
       "5/8 in. Gypsum Board",
       "Typical Insulation-R24",
@@ -221,8 +208,25 @@ $ ---------------------------------------------------------
    ..
 
 
+"TpclInsltdStlFrmdExtrrWllR19_l" = LAYERS
+   MATERIAL             = (
+      "25mm Stucco",
+      "5/8 in. Gypsum Board",
+      "Typical Insulation-R17",
+      "5/8 in. Gypsum Board"
+   )
+   ..
+
+"TpclInsltdStlFrmdExtrrWllR19_c" = CONSTRUCTION
+   TYPE                 = LAYERS
+   ABSORPTANCE          = 0.7
+   ROUGHNESS            = 5
+   LAYERS               = "TpclInsltdStlFrmdExtrrWllR19_l"
+   ..
+
+
 "Tpcl Insltd Bsmnt Mss WllR8_l" = LAYERS
-   MATERIAL                 = (
+   MATERIAL             = (
       "Typical Insulation-R7",
       "8 n. Cncrt Blck Bsmnt Wll"
    )
@@ -235,8 +239,37 @@ $ ---------------------------------------------------------
    LAYERS               = "Tpcl Insltd Bsmnt Mss WllR8_l"
    ..
 
+"Typical IEAD Roof-R32_l" = LAYERS
+   MATERIAL             = (
+      "Roof Membrane",
+      "Typical Insulation-R31",
+      "Metal Roof Surface"
+   )
+   ..
+
+"Typical IEAD Roof-R32_c" = CONSTRUCTION
+   TYPE                 = LAYERS
+   ABSORPTANCE          = 0.7
+   ROUGHNESS            = 1
+   LAYERS               = "Typical IEAD Roof-R32_l"
+   ..
+
+"Typical Overhead Door-R4_l" = LAYERS
+   MATERIAL             = (
+      "Typical Insulation-R4"
+   )
+   ..
+
+"Typical Overhead Door-R4_c" = CONSTRUCTION
+   TYPE                 = LAYERS
+   ABSORPTANCE          = 0.7
+   ROUGHNESS            = 4
+   LAYERS               = "Typical Overhead Door-R4_l"
+   ..
+
+
 "Tpcl Insltd Crptd 8n Slb FlrR5_l" = LAYERS
-   MATERIAL                 = (
+   MATERIAL             = (
       "Typical Insulation-R4",
       "8 n. Nrmlwght Cncrt Flr",
       "Typical Carpet Pad"
@@ -250,19 +283,6 @@ $ ---------------------------------------------------------
    LAYERS               = "Tpcl Insltd Crptd 8n Slb FlrR5_l"
    ..
 
-"Typical Overhead Door-R4_l" = LAYERS
-   MATERIAL                 = (
-      "Typical Insulation-R4"
-   )
-   ..
-
-"Typical Overhead Door-R4_c" = CONSTRUCTION
-   TYPE                 = LAYERS
-   ABSORPTANCE          = 0.7
-   ROUGHNESS            = 4
-   LAYERS               = "Typical Overhead Door-R4_l"
-   ..
-
 
 $ ---------------------------------------------------------
 $              Polygons
@@ -272,76 +292,84 @@ $ ---------------------------------------------------------
 
 
 "storyOne Plg" = POLYGON
-   V1        = ( 65.573770, 49.180328 )
-   V2        = ( 32.786885, 49.180328 )
-   V3        = ( 32.786885, 65.573770 )
-   V4        = ( 0.000000, 65.573770 )
-   V5        = ( 0.000000, 0.000000 )
-   V6        = ( -32.786885, 0.000000 )
-   V7        = ( -32.786885, -32.786885 )
-   V8        = ( 32.786885, -32.786885 )
-   V9        = ( 32.786885, 16.393443 )
-   V10        = ( 65.573770, 16.393443 )
+   V1        = ( -32.786885, -32.786885 )
+   V2        = ( 32.786885, -32.786885 )
+   V3        = ( 32.786885, 16.393443 )
+   V4        = ( 65.573770, 16.393443 )
+   V5        = ( 65.573770, 49.180328 )
+   V6        = ( 32.786885, 49.180328 )
+   V7        = ( 32.786885, 65.573770 )
+   V8        = ( 0.000000, 65.573770 )
+   V9        = ( 0.000000, 0.000000 )
+   V10        = ( -32.786885, 0.000000 )
    ..
 "rmOne Plg" = POLYGON
-   V1        = ( -32.786885, 0.000000 )
-   V2        = ( -32.786885, -32.786885 )
-   V3        = ( 0.000000, -32.786885 )
-   V4        = ( 0.000000, 0.000000 )
+   V1        = ( -32.786885, -32.786885 )
+   V2        = ( 0.000000, -32.786885 )
+   V3        = ( 0.000000, 0.000000 )
+   V4        = ( -32.786885, 0.000000 )
    ..
 "rmTwo Plg" = POLYGON
    V1        = ( 0.000000, -32.786885 )
    V2        = ( 32.786885, -32.786885 )
-   V3        = ( 32.786885, 32.786885 )
-   V4        = ( 0.000000, 32.786885 )
+   V3        = ( 32.786885, 16.393443 )
+   V4        = ( 32.786885, 32.786885 )
+   V5        = ( 0.000000, 32.786885 )
+   V6        = ( 0.000000, 0.000000 )
    ..
 "rmThree Plg" = POLYGON
-   V1        = ( 0.000000, 65.573770 )
-   V2        = ( 0.000000, 32.786885 )
-   V3        = ( 32.786885, 32.786885 )
+   V1        = ( 0.000000, 32.786885 )
+   V2        = ( 32.786885, 32.786885 )
+   V3        = ( 32.786885, 49.180328 )
    V4        = ( 32.786885, 65.573770 )
+   V5        = ( 0.000000, 65.573770 )
    ..
 "rmFour Plg" = POLYGON
    V1        = ( 32.786885, 16.393443 )
    V2        = ( 65.573770, 16.393443 )
    V3        = ( 65.573770, 49.180328 )
    V4        = ( 32.786885, 49.180328 )
+   V5        = ( 32.786885, 32.786885 )
    ..
 "storyTwo Plg" = POLYGON
-   V1        = ( 65.573770, 49.180328 )
-   V2        = ( 32.786885, 49.180328 )
-   V3        = ( 32.786885, 65.573770 )
-   V4        = ( 0.000000, 65.573770 )
-   V5        = ( 0.000000, 0.000000 )
-   V6        = ( -32.786885, 0.000000 )
-   V7        = ( -32.786885, -32.786885 )
-   V8        = ( 32.786885, -32.786885 )
-   V9        = ( 32.786885, 16.393443 )
-   V10        = ( 65.573770, 16.393443 )
+   V1        = ( -32.786885, -32.786885 )
+   V2        = ( 32.786885, -32.786885 )
+   V3        = ( 32.786885, 16.393443 )
+   V4        = ( 65.573770, 16.393443 )
+   V5        = ( 65.573770, 49.180328 )
+   V6        = ( 32.786885, 49.180328 )
+   V7        = ( 32.786885, 65.573770 )
+   V8        = ( 0.000000, 65.573770 )
+   V9        = ( 0.000000, 0.000000 )
+   V10        = ( -32.786885, 0.000000 )
    ..
 "rmOneL2 Plg" = POLYGON
-   V1        = ( -32.786885, 0.000000 )
-   V2        = ( -32.786885, -32.786885 )
-   V3        = ( 0.000000, -32.786885 )
-   V4        = ( 0.000000, 0.000000 )
+   V1        = ( -32.786885, -32.786885 )
+   V2        = ( 0.000000, -32.786885 )
+   V3        = ( 0.000000, 0.000000 )
+   V4        = ( -32.786885, 0.000000 )
    ..
 "rmTwoL2 Plg" = POLYGON
    V1        = ( 0.000000, -32.786885 )
    V2        = ( 32.786885, -32.786885 )
-   V3        = ( 32.786885, 32.786885 )
-   V4        = ( 0.000000, 32.786885 )
+   V3        = ( 32.786885, 16.393443 )
+   V4        = ( 32.786885, 32.786885 )
+   V5        = ( 0.000000, 32.786885 )
+   V6        = ( 0.000000, 0.000000 )
    ..
 "rmThreeL2 Plg" = POLYGON
-   V1        = ( 0.000000, 65.573770 )
-   V2        = ( 0.000000, 32.786885 )
-   V3        = ( 32.786885, 32.786885 )
+   V1        = ( 0.000000, 32.786885 )
+   V2        = ( 32.786885, 32.786885 )
+   V3        = ( 32.786885, 49.180328 )
    V4        = ( 32.786885, 65.573770 )
+   V5        = ( 0.000000, 65.573770 )
    ..
 "rmFourL2 Plg" = POLYGON
    V1        = ( 32.786885, 16.393443 )
    V2        = ( 65.573770, 16.393443 )
    V3        = ( 65.573770, 49.180328 )
    V4        = ( 32.786885, 49.180328 )
+   V5        = ( 32.786885, 32.786885 )
    ..
 
 
@@ -386,11 +414,11 @@ $ *********************************************************
 
 
 "storyOne" = FLOOR
-   Z                = 0.0
-   POLYGON          = "storyOne Plg"
-   SHAPE            = POLYGON
-   FLOOR-HEIGHT     = 11.475409836065573
-   C-DIAGRAM-DATA   = *storyOne UI DiagData*
+   Z               = 0.0
+   POLYGON         = "storyOne Plg"
+   SHAPE           = POLYGON
+   FLOOR-HEIGHT    = 11.475409836065573
+   C-DIAGRAM-DATA  = *storyOne UI DiagData*
    ..
 
 "rmOne" = SPACE
@@ -400,24 +428,24 @@ $ *********************************************************
    ..
 
 "rmOne_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmOne_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmOne_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmOne_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmOne_grnd_flr" = UNDERGROUND-WALL
-   CONSTRUCTION      = "Tpcl Insltd Crptd 8n Slb FlrR5"
-   LOCATION          = BOTTOM
+   CONSTRUCTION    = "Tpcl Insltd Crptd 8n Slb FlrR5_c"
+   LOCATION        = BOTTOM
    ..
 "rmTwo" = SPACE
    SHAPE           = POLYGON
@@ -426,32 +454,32 @@ $ *********************************************************
    ..
 
 "rmTwo_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmTwo_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmTwo_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmTwo_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmTwo_Wall_5" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V5
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V5
    ..
 "rmTwo_Wall_6" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V6
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V6
    ..
 "rmTwo_grnd_flr" = UNDERGROUND-WALL
-   CONSTRUCTION      = "Tpcl Insltd Crptd 8n Slb FlrR5"
-   LOCATION          = BOTTOM
+   CONSTRUCTION    = "Tpcl Insltd Crptd 8n Slb FlrR5_c"
+   LOCATION        = BOTTOM
    ..
 "rmThree" = SPACE
    SHAPE           = POLYGON
@@ -460,28 +488,28 @@ $ *********************************************************
    ..
 
 "rmThree_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmThree_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmThree_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmThree_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmThree_Wall_5" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V5
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V5
    ..
 "rmThree_grnd_flr" = UNDERGROUND-WALL
-   CONSTRUCTION      = "Tpcl Insltd Crptd 8n Slb FlrR5"
-   LOCATION          = BOTTOM
+   CONSTRUCTION    = "Tpcl Insltd Crptd 8n Slb FlrR5_c"
+   LOCATION        = BOTTOM
    ..
 "rmFour" = SPACE
    SHAPE           = POLYGON
@@ -490,35 +518,35 @@ $ *********************************************************
    ..
 
 "rmFour_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmFour_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmFour_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmFour_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmFour_Wall_5" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V5
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V5
    ..
 "rmFour_grnd_flr" = UNDERGROUND-WALL
-   CONSTRUCTION      = "Tpcl Insltd Crptd 8n Slb FlrR5"
-   LOCATION          = BOTTOM
+   CONSTRUCTION    = "Tpcl Insltd Crptd 8n Slb FlrR5_c"
+   LOCATION        = BOTTOM
    ..
 "storyTwo" = FLOOR
-   Z                = 11.475409836065573
-   POLYGON          = "storyTwo Plg"
-   SHAPE            = POLYGON
-   FLOOR-HEIGHT     = 11.475409836065573
-   C-DIAGRAM-DATA   = *storyTwo UI DiagData*
+   Z               = 11.475409836065573
+   POLYGON         = "storyTwo Plg"
+   SHAPE           = POLYGON
+   FLOOR-HEIGHT    = 11.475409836065573
+   C-DIAGRAM-DATA  = *storyTwo UI DiagData*
    ..
 
 "rmOneL2" = SPACE
@@ -528,23 +556,23 @@ $ *********************************************************
    ..
 
 "rmOneL2_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmOneL2_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmOneL2_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmOneL2_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmOneL2_roof" = EXTERIOR-WALL
-   CONSTRUCTION    = "Typical IEAD Roof-R32"
+   CONSTRUCTION    = "Typical IEAD Roof-R32_c"
    LOCATION        = TOP
    ..
 "rmTwoL2" = SPACE
@@ -554,31 +582,31 @@ $ *********************************************************
    ..
 
 "rmTwoL2_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmTwoL2_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmTwoL2_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmTwoL2_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmTwoL2_Wall_5" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V5
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V5
    ..
 "rmTwoL2_Wall_6" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V6
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V6
    ..
 "rmTwoL2_roof" = EXTERIOR-WALL
-   CONSTRUCTION    = "Typical IEAD Roof-R32"
+   CONSTRUCTION    = "Typical IEAD Roof-R32_c"
    LOCATION        = TOP
    ..
 "rmThreeL2" = SPACE
@@ -588,27 +616,27 @@ $ *********************************************************
    ..
 
 "rmThreeL2_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmThreeL2_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmThreeL2_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmThreeL2_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmThreeL2_Wall_5" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V5
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V5
    ..
 "rmThreeL2_roof" = EXTERIOR-WALL
-   CONSTRUCTION    = "Typical IEAD Roof-R32"
+   CONSTRUCTION    = "Typical IEAD Roof-R32_c"
    LOCATION        = TOP
    ..
 "rmFourL2" = SPACE
@@ -618,27 +646,27 @@ $ *********************************************************
    ..
 
 "rmFourL2_Wall_1" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V1
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V1
    ..
 "rmFourL2_Wall_2" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V2
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V2
    ..
 "rmFourL2_Wall_3" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V3
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V3
    ..
 "rmFourL2_Wall_4" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V4
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V4
    ..
 "rmFourL2_Wall_5" = EXTERIOR-WALL
-   CONSTRUCTION   = "TpclInsltdStlFrmdExtrrWllR19"
-   LOCATION       = SPACE-V5
+   CONSTRUCTION    = "TpclInsltdStlFrmdExtrrWllR19_c"
+   LOCATION        = SPACE-V5
    ..
 "rmFourL2_roof" = EXTERIOR-WALL
-   CONSTRUCTION    = "Typical IEAD Roof-R32"
+   CONSTRUCTION    = "Typical IEAD Roof-R32_c"
    LOCATION        = TOP
    ..
 
