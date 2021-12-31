@@ -88,10 +88,10 @@ $ ---------------------------------------------------------
 
 "F08 Metal surface" = MATERIAL
    TYPE            = PROPERTIES
-   THICKNESS       = 0.003
-   CONDUCTIVITY    = 14.344
-   DENSITY         = 488.452
-   SPECIFIC-HEAT   = 0.215
+   THICKNESS       = 0.052
+   CONDUCTIVITY    = 0.051
+   DENSITY         = 49.944
+   SPECIFIC-HEAT   = 0.468
    ..
 
 "Typical Insulation-R31" = MATERIAL
@@ -185,11 +185,12 @@ $ ---------------------------------------------------------
    )
    ..
 
-"TpclInsltdStlFrmdExtrrWllR19_c" = CONSTRUCTION
-   TYPE                 = LAYERS
-   ABSORPTANCE          = 0.7
-   ROUGHNESS            = 5
-   LAYERS               = "TpclInsltdStlFrmdExtrrWllR19_l"
+"25mm Stucco" = MATERIAL
+   TYPE            = PROPERTIES
+   THICKNESS       = 0.083
+   CONDUCTIVITY    = 0.228
+   DENSITY         = 115.87
+   SPECIFIC-HEAT   = 0.361
    ..
 
 "Tpcl Insltd Bsmnt Mss WllR8_l" = LAYERS
@@ -281,6 +282,22 @@ $ ---------------------------------------------------------
    ABSORPTANCE          = 0.7
    ROUGHNESS            = 5
    LAYERS               = "Tpcl Insltd Mtl DrR3_l"
+   ..
+
+
+"Tpcl Insltd Crptd 8n Slb FlrR5_l" = LAYERS
+   MATERIAL             = (
+      "Typical Insulation-R4",
+      "8 n. Nrmlwght Cncrt Flr",
+      "Typical Carpet Pad"
+   )
+   ..
+
+"Tpcl Insltd Crptd 8n Slb FlrR5_c" = CONSTRUCTION
+   TYPE                 = LAYERS
+   ABSORPTANCE          = 0.7
+   ROUGHNESS            = 4
+   LAYERS               = "Tpcl Insltd Crptd 8n Slb FlrR5_l"
    ..
 
 
