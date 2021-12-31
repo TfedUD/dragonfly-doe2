@@ -86,6 +86,21 @@ $ ---------------------------------------------------------
 
 
 
+"Typical Insulation-R4" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 4.0
+   ..
+
+"Typical Carpet Pad" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 1.229
+   ..
+
+"Typical Insulation-R7" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 7.0
+   ..
+
 "25mm Stucco" = MATERIAL
    TYPE            = PROPERTIES
    THICKNESS       = 0.083
@@ -94,20 +109,33 @@ $ ---------------------------------------------------------
    SPECIFIC-HEAT   = 0.361
    ..
 
-"5/8 in. Gypsum Board" = MATERIAL
-   TYPE            = PROPERTIES
-   THICKNESS       = 0.052
-   CONDUCTIVITY    = 0.051
-   DENSITY         = 49.944
-   SPECIFIC-HEAT   = 0.468
-   ..
-
 "8 n. Nrmlwght Cncrt Flr" = MATERIAL
    TYPE            = PROPERTIES
    THICKNESS       = 0.667
    CONDUCTIVITY    = 0.732
    DENSITY         = 144.962
    SPECIFIC-HEAT   = 0.357
+   ..
+
+"Typical Insulation-R3" = MATERIAL
+   TYPE            = RESISTANCE
+   RESISTANCE      = 3.0
+   ..
+
+"Metal Roof Surface" = MATERIAL
+   TYPE            = PROPERTIES
+   THICKNESS       = 0.003
+   CONDUCTIVITY    = 14.344
+   DENSITY         = 488.452
+   SPECIFIC-HEAT   = 0.215
+   ..
+
+"F08 Metal surface" = MATERIAL
+   TYPE            = PROPERTIES
+   THICKNESS       = 0.003
+   CONDUCTIVITY    = 14.344
+   DENSITY         = 488.452
+   SPECIFIC-HEAT   = 0.215
    ..
 
 "Roof Membrane" = MATERIAL
@@ -123,27 +151,12 @@ $ ---------------------------------------------------------
    RESISTANCE      = 17.0
    ..
 
-"Metal Roof Surface" = MATERIAL
+"5/8 in. Gypsum Board" = MATERIAL
    TYPE            = PROPERTIES
-   THICKNESS       = 0.003
-   CONDUCTIVITY    = 14.344
-   DENSITY         = 488.452
-   SPECIFIC-HEAT   = 0.215
-   ..
-
-"Typical Insulation-R24" = MATERIAL
-   TYPE            = RESISTANCE
-   RESISTANCE      = 24.0
-   ..
-
-"Typical Insulation-R4" = MATERIAL
-   TYPE            = RESISTANCE
-   RESISTANCE      = 4.0
-   ..
-
-"Typical Insulation-R7" = MATERIAL
-   TYPE            = RESISTANCE
-   RESISTANCE      = 7.0
+   THICKNESS       = 0.052
+   CONDUCTIVITY    = 0.051
+   DENSITY         = 49.944
+   SPECIFIC-HEAT   = 0.468
    ..
 
 "8 n. Cncrt Blck Bsmnt Wll" = MATERIAL
@@ -154,39 +167,43 @@ $ ---------------------------------------------------------
    SPECIFIC-HEAT   = 0.392
    ..
 
-"Typical Carpet Pad" = MATERIAL
-   TYPE            = RESISTANCE
-   RESISTANCE      = 1.229
-   ..
-
-"F08 Metal surface" = MATERIAL
-   TYPE            = PROPERTIES
-   THICKNESS       = 0.003
-   CONDUCTIVITY    = 14.344
-   DENSITY         = 488.452
-   SPECIFIC-HEAT   = 0.215
-   ..
-
 "Typical Insulation-R31" = MATERIAL
    TYPE            = RESISTANCE
    RESISTANCE      = 31.0
    ..
 
-"Typical Insulation-R3" = MATERIAL
+"Typical Insulation-R24" = MATERIAL
    TYPE            = RESISTANCE
-   RESISTANCE      = 3.0
+   RESISTANCE      = 24.0
    ..
-"Typical Overhead Door-R4_l" = LAYERS
+"Tpcl Insltd Bsmnt Mss WllR8_l" = LAYERS
    MATERIAL             = (
-      "Typical Insulation-R4"
+      "Typical Insulation-R7",
+      "8 n. Cncrt Blck Bsmnt Wll"
    )
    ..
 
-"Typical Overhead Door-R4_c" = CONSTRUCTION
+"Tpcl Insltd Bsmnt Mss WllR8_c" = CONSTRUCTION
    TYPE                 = LAYERS
    ABSORPTANCE          = 0.7
    ROUGHNESS            = 4
-   LAYERS               = "Typical Overhead Door-R4_l"
+   LAYERS               = "Tpcl Insltd Bsmnt Mss WllR8_l"
+   ..
+
+
+"Typical IEAD Roof-R32_l" = LAYERS
+   MATERIAL             = (
+      "Roof Membrane",
+      "Typical Insulation-R31",
+      "Metal Roof Surface"
+   )
+   ..
+
+"Typical IEAD Roof-R32_c" = CONSTRUCTION
+   TYPE                 = LAYERS
+   ABSORPTANCE          = 0.7
+   ROUGHNESS            = 1
+   LAYERS               = "Typical IEAD Roof-R32_l"
    ..
 
 "Tpcl Insltd Mtl DrR3_l" = LAYERS
@@ -219,20 +236,35 @@ $ ---------------------------------------------------------
    LAYERS               = "TpclInsltdStlFrmdExtrrWllR19_l"
    ..
 
-"Typical IEAD Roof-R32_l" = LAYERS
+"Typical Overhead Door-R4_l" = LAYERS
    MATERIAL             = (
-      "Roof Membrane",
-      "Typical Insulation-R31",
-      "Metal Roof Surface"
+      "Typical Insulation-R4"
    )
    ..
 
-"Typical IEAD Roof-R32_c" = CONSTRUCTION
+"Typical Overhead Door-R4_c" = CONSTRUCTION
    TYPE                 = LAYERS
    ABSORPTANCE          = 0.7
-   ROUGHNESS            = 1
-   LAYERS               = "Typical IEAD Roof-R32_l"
+   ROUGHNESS            = 4
+   LAYERS               = "Typical Overhead Door-R4_l"
    ..
+
+"Tpcl Insltd Crptd 8n Slb FlrR5_l" = LAYERS
+   MATERIAL             = (
+      "Typical Insulation-R4",
+      "8 n. Nrmlwght Cncrt Flr",
+      "Typical Carpet Pad"
+   )
+   ..
+
+"Tpcl Insltd Crptd 8n Slb FlrR5_c" = CONSTRUCTION
+   TYPE                 = LAYERS
+   ABSORPTANCE          = 0.7
+   ROUGHNESS            = 4
+   LAYERS               = "Tpcl Insltd Crptd 8n Slb FlrR5_l"
+   ..
+
+
 
 "TpclInsltdStlFrmdExtrrFlrR27_l" = LAYERS
    MATERIAL             = (
@@ -252,38 +284,6 @@ $ ---------------------------------------------------------
    ..
 
 
-"Tpcl Insltd Crptd 8n Slb FlrR5_l" = LAYERS
-   MATERIAL             = (
-      "Typical Insulation-R4",
-      "8 n. Nrmlwght Cncrt Flr",
-      "Typical Carpet Pad"
-   )
-   ..
-
-"Tpcl Insltd Crptd 8n Slb FlrR5_c" = CONSTRUCTION
-   TYPE                 = LAYERS
-   ABSORPTANCE          = 0.7
-   ROUGHNESS            = 4
-   LAYERS               = "Tpcl Insltd Crptd 8n Slb FlrR5_l"
-   ..
-
-"Tpcl Insltd Bsmnt Mss WllR8_l" = LAYERS
-   MATERIAL             = (
-      "Typical Insulation-R7",
-      "8 n. Cncrt Blck Bsmnt Wll"
-   )
-   ..
-
-"Tpcl Insltd Bsmnt Mss WllR8_c" = CONSTRUCTION
-   TYPE                 = LAYERS
-   ABSORPTANCE          = 0.7
-   ROUGHNESS            = 4
-   LAYERS               = "Tpcl Insltd Bsmnt Mss WllR8_l"
-   ..
-
-
-
-
 $ ---------------------------------------------------------
 $              Polygons
 $ ---------------------------------------------------------
@@ -293,15 +293,17 @@ $ ---------------------------------------------------------
 
 "storyOne Plg" = POLYGON
    V1        = ( -32.786885, -32.786885 )
-   V2        = ( 32.786885, -32.786885 )
-   V3        = ( 32.786885, 16.393443 )
-   V4        = ( 65.573770, 16.393443 )
-   V5        = ( 65.573770, 49.180328 )
-   V6        = ( 32.786885, 49.180328 )
-   V7        = ( 32.786885, 65.573770 )
-   V8        = ( 0.000000, 65.573770 )
-   V9        = ( 0.000000, 0.000000 )
-   V10        = ( -32.786885, 0.000000 )
+   V2        = ( 0.000000, -32.786885 )
+   V3        = ( 32.786885, -32.786885 )
+   V4        = ( 32.786885, 16.393443 )
+   V5        = ( 65.573770, 16.393443 )
+   V6        = ( 65.573770, 49.180328 )
+   V7        = ( 32.786885, 49.180328 )
+   V8        = ( 32.786885, 65.573770 )
+   V9        = ( 0.000000, 65.573770 )
+   V10        = ( 0.000000, 32.786885 )
+   V11        = ( 0.000000, 0.000000 )
+   V12        = ( -32.786885, 0.000000 )
    ..
 "rmOne Plg" = POLYGON
    V1        = ( -32.786885, -32.786885 )
@@ -333,15 +335,17 @@ $ ---------------------------------------------------------
    ..
 "storyTwo Plg" = POLYGON
    V1        = ( -32.786885, -32.786885 )
-   V2        = ( 32.786885, -32.786885 )
-   V3        = ( 32.786885, 16.393443 )
-   V4        = ( 65.573770, 16.393443 )
-   V5        = ( 65.573770, 49.180328 )
-   V6        = ( 32.786885, 49.180328 )
-   V7        = ( 32.786885, 65.573770 )
-   V8        = ( 0.000000, 65.573770 )
-   V9        = ( 0.000000, 0.000000 )
-   V10        = ( -32.786885, 0.000000 )
+   V2        = ( 0.000000, -32.786885 )
+   V3        = ( 32.786885, -32.786885 )
+   V4        = ( 32.786885, 16.393443 )
+   V5        = ( 65.573770, 16.393443 )
+   V6        = ( 65.573770, 49.180328 )
+   V7        = ( 32.786885, 49.180328 )
+   V8        = ( 32.786885, 65.573770 )
+   V9        = ( 0.000000, 65.573770 )
+   V10        = ( 0.000000, 32.786885 )
+   V11        = ( 0.000000, 0.000000 )
+   V12        = ( -32.786885, 0.000000 )
    ..
 "rmOneL2 Plg" = POLYGON
    V1        = ( -32.786885, -32.786885 )
