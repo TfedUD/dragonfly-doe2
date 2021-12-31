@@ -1,6 +1,6 @@
 """dragonfly-doe2 commands which will be added to dragonfly command line interface."""
 import click
-from dragonfly_doe2.cli import main
+from dragonfly.cli import main
 
 from .translate import translate
 
