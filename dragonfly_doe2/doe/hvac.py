@@ -2,7 +2,7 @@ from .utils import short_name
 from dataclasses import dataclass
 
 
-class HVAC(object):
+class HVAC:
     """Placeholder HVAC class.
        Currently will just return no hvac
     """
@@ -19,7 +19,7 @@ class HVAC(object):
 
 
 @dataclass
-class _HVACBase(object):
+class _HVACBase:
     """Make base that takes HB HVAC objs:
         Checks if in eQuest system lib, makes obj
     """
